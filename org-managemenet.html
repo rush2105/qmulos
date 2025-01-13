@@ -15,28 +15,167 @@
     <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/introjs.css" integrity="sha512-4OzqLjfh1aJa7M33b5+h0CSx0Q3i9Qaxlrr1T/Z+Vz+9zs5A7GM3T3MFKXoreghi3iDOSbkPMXiMBhFO7UBW/g==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/intro.js/7.2.0/intro.min.js"
  crossorigin="anonymous" referrerpolicy="no-referrer"></script> -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> -->
     <script src="js/driver.js"></script>
 
     <!-- <script src="js/dd.js"></script> -->
-    <script src="js/screen-1.js"></script>
-
+    <!-- <script src="js/screen-3.js"></script> -->
+    <script src="js/org.js"></script>
     <link rel="stylesheet" href="css/step2.css">
     <link rel="stylesheet" href="css/step3.css">
-    <link rel="stylesheet" href="css/step-4.css">
+    <link rel="stylesheet" href="css/org.css">
+
+    <!-- <link rel="stylesheet" href="css/step-4.css">
     <link rel="stylesheet" href="css/step-5.css">
-    <link rel="stylesheet" href="css/step-6.css">
+    <link rel="stylesheet" href="css/step-6.css"> -->
 
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css"
         integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="">
+
+    <script>
+
+
+    </script>
     <style>
-        /* 
-.driver-popover-next-btn {
-	display: none !important;
-} */
+        .select2.select2-container.select2-container--default.select2-container--below {
+            /*! background-color: #2b3033; */
+        }
+
+        .select2-container--default .select2-selection--single {
+            background-color: #2b3033;
+            color: #fff;
+            border: none;
+            height: 32px;
+            line-height: 32px;
+        }
+
+        .select2-container--default .select2-selection--single .select2-selection__rendered {
+            color: #fff;
+            line-height: 32px;
+        }
+
+        .select2-dropdown.select2-dropdown--below {
+            background-color: #2b3033;
+            color: #fff;
+        }
+
+        #select2-data-select-res {}
+
+        select2-results__option:hover {
+            background-color: #000;
+        }
+
+        .select2-container--default .select2-results__option--highlighted.select2-results__option--selectable {
+            background-color: #007a33;
+        }
+
+        .select2-container--default .select2-results__option--selected {
+            background-color: #007a33;
+        }
+
+        /* HTML: <div class="loader"></div> */
+        /* HTML: <div class="loader"></div> */
+        .loader {
+            width: 60px;
+            aspect-ratio: 2;
+            --_g: no-repeat radial-gradient(circle closest-side, #000 90%, #0000);
+            background:
+                var(--_g) 0% 50%,
+                var(--_g) 50% 50%,
+                var(--_g) 100% 50%;
+            background-size: calc(100%/3) 50%;
+            animation: l3 1s infinite linear;
+        }
+
+        @keyframes l3 {
+            20% {
+                background-position: 0% 0%, 50% 50%, 100% 50%
+            }
+
+            40% {
+                background-position: 0% 100%, 50% 0%, 100% 50%
+            }
+
+            60% {
+                background-position: 0% 50%, 50% 100%, 100% 0%
+            }
+
+            80% {
+                background-position: 0% 50%, 50% 50%, 100% 100%
+            }
+        }
+
+        .loader-wrapper {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #fff;
+            z-index: 1111;
+            display: none;
+        }
+
+        .loader-wrapper.open {
+            display: flex;
+        }
+
+        #orgchildren {
+            width: 49% !important;
+        }
+
+        #orgeditselect {
+            height: 32px;
+            appearance: auto;
+        }
+        #org_11 {
+	text-transform: capitalize;
+}
+        .modal .modal-header.control-modal-header {
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 20px;
+            padding-right: 20px;
+        }
+
+        #modalOrgCreate * {
+            box-sizing: border-box;
+            max-width: 100%;
+        }
+
+        .modal-body:last-child {
+            max-height: calc(100vh - 259px);
+        }
+
+        #modalOrgCreate {
+            overflow: hidden;
+        }
+
+        .modal-dialog.modal-lg {
+            width: 100%;
+            margin: 0;
+            transform: none !important;
+        }
+
+        #btnRenameOrg {
+            display: none;
+        }
+
+        #txtorgname {
+            height: 32px;
+        }
+
+        .none {
+            display: none;
+        }
     </style>
 </head>
 
@@ -833,14 +972,15 @@
 
 
                                             <a id="system-managemenet-org" href="/en-US/configuration_page">Organization
-                                                Managemenet</a>
+                                                Management</a>
 
 
                                         </li>
                                         <li class=" " data-target-view="configuration_page">
 
 
-                                            <a id="system-managemenet" href="/en-US/configuration_page">System
+                                            <a class="no-lan" id="system-managemenet"
+                                                href="system-management.html">System
                                                 Managemenet</a>
 
 
@@ -914,7 +1054,7 @@
                                         <li class=" " data-target-view="DataSources">
 
 
-                                            <a class="no-lan" href="screen-2.html">Data Sources</a>
+                                            <a href="/en-US/DataSources">Data Sources</a>
 
 
                                         </li>
@@ -935,7 +1075,7 @@
                         <div class="" data-role="app-name" style="display: none;">
                             <div class="icon---pages-enterprise---dev---ITlH-" data-role="app-icon"></div>
                             <span class="" data-role="app-label">
-                                Q-Compliance
+                                Organization Management
                             </span>
                         </div>
                     </a>
@@ -944,225 +1084,612 @@
         </div>
     </header>
     <div id="navSkip" tabindex="-1"></div>
-    <div class="main-section-body dashboard-body step-1 " role="main">
-        <div id="dashboard1" class="dashboard view-mode " data-cid="view9422" version="2"
+
+    <div class="main-section-body dashboard-body step-2 " role="main">
+        <div id="dashboard1" class="dashboard view-mode" data-cid="view9545" version="2"
             data-view="views/dashboard/Master" data-render-time="0.001">
-            <div id="view_9430" class="dashboard-messages dashboard-header-dashboardmessages" data-cid="view9431"
-                version="2" data-view="views/dashboard/header/DashboardMessages" data-render-time="0"
-                style="display: none;"></div>
-            <div id="view_9440" class="dashboard-header dashboard-header-dashboardheader" data-cid="view9441"
-                version="2" data-view="views/dashboard/header/DashboardHeader" data-render-time="0"></div>
+            <div id="view_9553" class="dashboard-messages dashboard-header-dashboardmessages" data-cid="view9554"
+                version="2" data-view="views/dashboard/header/DashboardMessages" style="display: none;"
+                data-render-time="0"></div>
+            <div id="view_9563" class="dashboard-header dashboard-header-dashboardheader" data-cid="view9564"
+                version="2" data-view="views/dashboard/header/DashboardHeader" data-render-time="0">
+                <div class="header-controls"></div>
+                <h1 id="view_9802" class="dashboard-title dashboard-header-title" data-cid="view9803" version="2"
+                    data-view="views/dashboard/header/Title" data-render-time="0">Organization Management</h1>
+                <p id="view_9811" class="description dashboard-header-description hidden" data-cid="view9812"
+                    version="2" data-view="views/dashboard/header/Description" data-render-time="0"></p>
+            </div>
             <div id="layout1" class="dashboard-layout-row-column dashboard-layout-rowcolumn-rowcolumnlayout"
-                data-cid="view9443" version="2" data-view="views/dashboard/layout/row_column/RowColumnLayout"
+                data-cid="view9476" version="2" data-view="views/dashboard/layout/row_column/RowColumnLayout"
                 data-render-time="0">
-                <div id="row1" class="dashboard-row dashboard-layout-rowcolumn-row" data-cid="view9452" version="2"
+                <div id="row1" class="dashboard-row dashboard-layout-rowcolumn-row" data-cid="view9485" version="2"
                     data-view="views/dashboard/layout/row_column/Row" data-render-time="0">
-                    <div id="panel1" class="dashboard-cell dashboard-layout-panel last-visible" data-cid="view9462"
-                        version="2" data-view="views/dashboard/layout/Panel" data-render-time="0" style="width: 100%;">
+                    <div id="panel1" class="dashboard-cell dashboard-layout-panel last-visible" data-cid="view9495"
+                        version="2" data-view="views/dashboard/layout/Panel" data-render-time="0.003"
+                        style="width: 100%;">
                         <div class="dashboard-panel dashboardPanel---pages-enterprise---dev---1UN1T" tabindex="0"
                             style="min-height: 0px;">
                             <h2 class="panel-title empty"></h2>
                             <div id="panel1-fieldset"
                                 class="fieldset dashboard-form-fieldset hide-label empty hidden editable"
-                                data-cid="view9471" version="2" data-view="views/dashboard/form/Fieldset"
+                                data-cid="view9504" version="2" data-view="views/dashboard/form/Fieldset"
                                 data-render-time="0"></div>
                             <div class="panel-element-row">
                                 <div id="content1" class="dashboard-element html dashboard-element-html"
-                                    data-cid="view9480" version="2" data-view="views/dashboard/element/Html"
-                                    data-render-time="0.01" style="width: 100%;">
+                                    data-cid="view9513" version="2" data-view="views/dashboard/element/Html"
+                                    data-render-time="0.035" style="width: 100%;">
                                     <div class="panel-body html">
-                                        <div class="main-container">
-                                            <section class="bg-dark">
-                                                <div class="container">
-
-                                                    <div class="row">
-                                                        <div class="col-sm-12">
-                                                            <h6 class="uppercase">Qmulos Enterprise Compliance
-                                                                (Q-Compliance)</h6>
-                                                            <hr class="mb160 mb-xs-24">
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row">
-
-                                                        <div class="row">
-                                                            <div class="col-md-10">
-                                                                <h1 style="font-size:56px" class="thin">Compliance
-                                                                    to Enable Security</h1>
+                                        <div id="layout32" class="none table-check added">
+                                            <table style="width:100%;">
+                                                <tbody>
+                                                    <tr>
+                                                        <td style="width:49%;">
+                                                            <div class="edit-access" id="orgnav"><b><a id="org_0"
+                                                                        class="btn-pill" dataval="0">Global</a></b>
                                                             </div>
-                                                        </div>
+                                                        </td>
+                                                        <td style="width:2%;" id="divsplitter"></td>
+                                                        <td style="width:49%;">
+                                                            <div class="noaccess" id="sysnav"></div>
+                                                        </td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td style="border: 1px solid;border-color:silver;padding: 10px 10px 10px 10px;width:49%;vertical-align:top;"
+                                                            id="orgchildren">Global Organizations: <br><a id="org_1"
+                                                                class="btn-pill" dataval="1" dataparents=""
+                                                                dataparent="">Qmulos</a></td>
+                                                        <td style="width:2%;" id="divsplitter"></td>
+                                                        <td style="width:49%;border: 1px solid;border-color:silver;padding: 10px 10px 10px 10px;vertical-align:top;"
+                                                            class="hidden" id="systemsdiv"></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div id="layout2"
+                                            class="table-check new-add dashboard-layout-row-column dashboard-layout-rowcolumn-rowcolumnlayout"
+                                            data-cid="view9476" version="2"
+                                            data-view="views/dashboard/layout/row_column/RowColumnLayout"
+                                            data-render-time="0">
+                                            <div id="row1" class="dashboard-row dashboard-layout-rowcolumn-row"
+                                                data-cid="view9485" version="2"
+                                                data-view="views/dashboard/layout/row_column/Row" data-render-time="0">
+                                                <div id="panel1"
+                                                    class="dashboard-cell dashboard-layout-panel last-visible"
+                                                    data-cid="view9495" version="2"
+                                                    data-view="views/dashboard/layout/Panel" data-render-time="0.003"
+                                                    style="width: 100%;">
+                                                    <div class="dashboard-panel dashboardPanel---pages-enterprise---dev---1UN1T"
+                                                        tabindex="0" style="min-height: 0px;">
+                                                        <h2 class="panel-title empty"></h2>
+                                                        <div id="panel1-fieldset"
+                                                            class="fieldset dashboard-form-fieldset hide-label empty hidden editable"
+                                                            data-cid="view9504" version="2"
+                                                            data-view="views/dashboard/form/Fieldset"
+                                                            data-render-time="0"></div>
+                                                        <div class="panel-element-row">
+                                                            <div id="content1"
+                                                                class="dashboard-element html dashboard-element-html"
+                                                                data-cid="view9513" version="2"
+                                                                data-view="views/dashboard/element/Html"
+                                                                data-render-time="0.035" style="width: 100%;">
+                                                                <div class="panel-body html">
+                                                                    <div>
+                                                                        <table style="width:100%;">
+                                                                            <tbody>
+                                                                                <tr>
+                                                                                    <td style="width:49%;">
+                                                                                        <div class="edit-access"
+                                                                                            id="orgnav"><a id="org_0"
+                                                                                                class="btn-pill"
+                                                                                                dataval="0">Global</a>
+                                                                                            &gt;<b><a id="org_1"
+                                                                                                    class="btn-pill"
+                                                                                                    dataval="1"
+                                                                                                    dataparents="">Qmulos</a></b>
+                                                                                            <select id="orgeditselect"
+                                                                                                class="edit-element orgmgmtselect">
+                                                                                                <option value=""
+                                                                                                    class="edit-element"
+                                                                                                    selected="">Edit
+                                                                                                </option>
+                                                                                                <option id="renameorg"
+                                                                                                    class="edit-element"
+                                                                                                    value="Rename">
+                                                                                                    Rename</option>
+                                                                                                <option id="deleteorg"
+                                                                                                    class="delete-element"
+                                                                                                    value="Delete">
+                                                                                                    Delete</option>
+                                                                                            </select>
+                                                                                        </div>
+                                                                                    </td>
+                                                                                    <td style="width:2%;"
+                                                                                        id="divsplitter"></td>
+                                                                                    <td style="width:49%;">
+                                                                                        <div class="noaccess"
+                                                                                            id="sysnav"></div>
+                                                                                    </td>
+                                                                                </tr>
+                                                                                <tr>
+                                                                                    <td style="border: 1px solid;border-color:silver;padding: 10px 10px 10px 10px;width:49%;vertical-align:top;"
+                                                                                        id="orgchildren">Qmulos
+                                                                                        Organizations: <br><button
+                                                                                            id="addsuborg" type="button"
+                                                                                            class="btn btn-primary auditor-only audit-notes-update-button">Add
+                                                                                            Organization</button><a
+                                                                                            id="org_11" class="real btn-pill"
+                                                                                            dataval="11" dataparents=""
+                                                                                            dataparent="">Headquarters</a><a
+                                                                                            id="org_187"
+                                                                                            class="btn-pill"
+                                                                                            dataval="187" dataparents=""
+                                                                                            dataparent="">Qmulos
+                                                                                            APAC</a><a id="org_9"
+                                                                                            class="btn-pill" dataval="9"
+                                                                                            dataparents=""
+                                                                                            dataparent="">Qmulos
+                                                                                            CA</a><a id="org_250"
+                                                                                            class="btn-pill"
+                                                                                            dataval="250" dataparents=""
+                                                                                            dataparent="">Qmulos
+                                                                                            Commercial</a><a id="org_8"
+                                                                                            class="btn-pill" dataval="8"
+                                                                                            dataparents=""
+                                                                                            dataparent="">Qmulos
+                                                                                            DC</a><a id="org_10"
+                                                                                            class="btn-pill"
+                                                                                            dataval="10" dataparents=""
+                                                                                            dataparent="">Qmulos NM</a>
+                                                                                    </td>
+                                                                                    <td style="width:2%;"
+                                                                                        id="divsplitter"></td>
+                                                                                    <td style="width:49%;border: 1px solid;border-color:silver;padding: 10px 10px 10px 10px;vertical-align:top;"
+                                                                                        class="" id="systemsdiv">Qmulos
+                                                                                        Systems: <br><a id="sys_326"
+                                                                                            class="btn-pill"
+                                                                                            dataval="326"
+                                                                                            datalvl="system">800-53 Rev
+                                                                                            5</a><a id="sys_273"
+                                                                                            class="btn-pill"
+                                                                                            dataval="273"
+                                                                                            datalvl="system">CMMC
+                                                                                            2.0</a><a id="sys_228"
+                                                                                            class="btn-pill"
+                                                                                            dataval="228"
+                                                                                            datalvl="system">Customer</a><a
+                                                                                            id="sys_173"
+                                                                                            class="btn-pill"
+                                                                                            dataval="173"
+                                                                                            datalvl="system">Linux</a><a
+                                                                                            id="sys_327"
+                                                                                            class="btn-pill"
+                                                                                            dataval="327"
+                                                                                            datalvl="system">MITRE
+                                                                                            ATTACK</a><a id="sys_331"
+                                                                                            class="btn-pill"
+                                                                                            dataval="331"
+                                                                                            datalvl="system">MITRE
+                                                                                            D3FEND</a><a id="sys_193"
+                                                                                            class="btn-pill"
+                                                                                            dataval="193"
+                                                                                            datalvl="system">NERC
+                                                                                            CIP</a><a id="sys_238"
+                                                                                            class="btn-pill"
+                                                                                            dataval="238"
+                                                                                            datalvl="system">OMB
+                                                                                            M-21-31</a><a id="sys_340"
+                                                                                            class="btn-pill"
+                                                                                            dataval="340"
+                                                                                            datalvl="system">OMB
+                                                                                            M-22-09</a><a id="sys_147"
+                                                                                            class="btn-pill"
+                                                                                            dataval="147"
+                                                                                            datalvl="system">Q Test
+                                                                                            System</a><a id="sys_81"
+                                                                                            class="btn-pill"
+                                                                                            dataval="81"
+                                                                                            datalvl="system">Splunk</a><a
+                                                                                            id="sys_5" class="btn-pill"
+                                                                                            dataval="5"
+                                                                                            datalvl="system">Windows</a>
+                                                                                    </td>
+                                                                                </tr>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </div>
 
-                                                        <div class="row mb160 mb-xs-0">
-                                                            <div class="col-md-6 col-sm-8">
-                                                                <p class="lead">Automated compliance through
-                                                                    continuous assessment</p>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row">
-                                                            <div class="col-md-3 col-sm-6 mb-xs-24">
-                                                                <i class="fa-solid fa-pencil fa-4x mb-5"></i>
-                                                                <h6 class="uppercase">EXECUTIVE</h6>
-                                                                <ul>
-                                                                    <a href="/about_page">
-                                                                        <li>About Q-Compliance</li>
-                                                                    </a>
-                                                                    <a href="/organization_overview">
-                                                                        <li>Organization Overview</li>
-                                                                    </a>
-                                                                    <a href="/sub_organization_overview">
-                                                                        <li>Organization Systems Overview</li>
-                                                                    </a>
-                                                                    <a href="/org_authorization">
-                                                                        <li>Organization Systems Authorizations</li>
-                                                                    </a>
-                                                                    <a href="/historic_overview">
-                                                                        <li>Historic Overview</li>
-                                                                    </a>
-                                                                </ul>
-                                                            </div>
-
-                                                            <div class="col-md-3 col-sm-6 mb-xs-24">
-                                                                <i class="fa-solid fa-chart-line fa-4x mb-5"></i>
-                                                                <h6 class="uppercase">COMPLIANCE/SYSTEM OVERVIEW
-                                                                </h6>
-                                                                <ul>
-                                                                    <a href="">
-                                                                        <li>RMF Overview</li>
-                                                                    </a>
-                                                                    <a href="/framework_menu">
-                                                                        <li>Frameworks</li>
-                                                                    </a>
-                                                                    <a href="/family_overview">
-                                                                        <li>Family Overview</li>
-                                                                    </a>
-                                                                    <a href="/control_overview">
-                                                                        <li>Control Overview</li>
-                                                                    </a>
-                                                                    <a href="/poam_overview">
-                                                                        <li>POAM Overview</li>
-                                                                    </a>
-                                                                    <a href="">
-                                                                        <li>Reports</li>
-                                                                    </a>
-                                                                    <a href="">
-                                                                        <li>System Authorization</li>
-                                                                    </a>
-                                                                    <a href="/system_con_mon">
-                                                                        <li>System Continuous Monitoring</li>
-                                                                    </a>
-                                                                    <a href="/system_alert_page">
-                                                                        <li>System Actions</li>
-                                                                    </a>
-                                                                    <a href="/sctm">
-                                                                        <li>Security Controls Traceability Matrix
-                                                                        </li>
-                                                                    </a>
-                                                                    <a href="/spa#/oscal_ssp">
-                                                                        <li>System Security Plan</li>
-                                                                    </a>
-                                                                </ul>
-                                                            </div>
-
-                                                            <div class="col-md-3 col-sm-6 mb-xs-24">
-                                                                <i class="fa-solid fa-magnifying-glass fa-4x mb-5"></i>
-                                                                <h6 class="uppercase">INVESTIGATE CONTROLS</h6>
-                                                                <ul>
-                                                                    <a href="/generic_control_page?family_name=AC:">
-                                                                        <li>Access Control</li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=AT:">
-                                                                        <li>Awareness and Training</li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=AU:">
-                                                                        <li>Audit and Accountability</li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=CA:">
-                                                                        <li>Security Assessment and Authorization
-                                                                        </li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=CM:">
-                                                                        <li>Configuration Management</li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=CP:">
-                                                                        <li>Contingency Planning</li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=IA:">
-                                                                        <li>Identification and Authentication</li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=IR:">
-                                                                        <li>Incident Response</li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=MA:">
-                                                                        <li>Maintenance</li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=MP:">
-                                                                        <li>Media Protection</li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=PE:">
-                                                                        <li>Physical and Environmental Protection
-                                                                        </li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=PL:">
-                                                                        <li>Planning</li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=PM:">
-                                                                        <li>Program Management</li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=PS:">
-                                                                        <li>Personnel Security</li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=PT:">
-                                                                        <li>Personally Identifiable Information
-                                                                            Processing And Transparency</li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=RA:">
-                                                                        <li>Risk Assessment</li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=SA:">
-                                                                        <li>System and Services Acquisition</li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=SC:">
-                                                                        <li>System and Communications Protection
-                                                                        </li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=SI:">
-                                                                        <li>System and Information Integrity</li>
-                                                                    </a>
-                                                                    <a href="/generic_control_page?family_name=SR:">
-                                                                        <li>Supply Chain Risk Management</li>
-                                                                    </a>
-                                                                </ul>
-                                                            </div>
-
-                                                            <div class="col-md-3 col-sm-6 mb-xs-24">
-                                                                <i class="fa-solid fa-sliders fa-4x mb-5"></i>
-                                                                <h6 class="uppercase">CONFIGURATION</h6>
-                                                                <ul>
-                                                                    <a href="">
-                                                                        <li>Configuration</li>
-                                                                    </a>
-                                                                    <a id="og-managemenet">
-                                                                        <li>Organization Management</li>
-                                                                    </a>
-                                                                    <a href="">
-                                                                        <li>Explore Visuals</li>
-                                                                    </a>
-                                                                    <a href="">
-                                                                        <li>Control Monitoring Coverage</li>
-                                                                    </a>
-                                                                    <a href="">
-                                                                        <li>Data Sources</li>
-                                                                    </a>
-                                                                    <a href="">
-                                                                        <li>Quick Start</li>
-                                                                    </a>
-                                                                </ul>
+                                                                    <div aria-labelledby="auditDetailModal"
+                                                                        role="dialog" tabindex="-1" id="modalOrgDelete"
+                                                                        class="modal fade control-modal">
+                                                                        <div class="modal-dialog modal-lg">
+                                                                            <div class="modal-content">
+                                                                                <div
+                                                                                    class="modal-header control-modal-header">
+                                                                                    <h3>
+                                                                                        Delete Organization
+                                                                                    </h3>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="modal-body control-modal-body">
+                                                                                    <div id="deletetxt"></div>
+                                                                                    <button id="btnDeleteOrg"
+                                                                                        class="btn btn-primary auditor-only audit-notes-update-button"
+                                                                                        type="button">Delete</button>
+                                                                                    <button id="btnCancelOrgDelete"
+                                                                                        class="btn btn-primary auditor-only audit-notes-update-button"
+                                                                                        type="button">Cancel</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div aria-labelledby="auditDetailModal"
+                                                                        role="dialog" tabindex="-1" id="modalSysCreate"
+                                                                        class="modal fade control-modal">
+                                                                        <div class="modal-dialog modal-lg">
+                                                                            <div class="modal-content">
+                                                                                <div
+                                                                                    class="modal-header control-modal-header">
+                                                                                    <h3>
+                                                                                        <div id="systableheader">Add New
+                                                                                            Organization to: Qmulos
+                                                                                        </div>
+                                                                                    </h3>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="modal-body control-modal-body">
+                                                                                    System Name:
+                                                                                    <input id="txtsysname"
+                                                                                        style="width:175px;margin-bottom:0px;margin-left:4px;margin-right:5px;"
+                                                                                        name="sysnametxtbox"
+                                                                                        type="text">
+                                                                                    <button id="btnCreateSys"
+                                                                                        class="btn btn-primary auditor-only audit-notes-update-button"
+                                                                                        type="button">Create
+                                                                                        System</button>
+                                                                                    <button id="btnRenameSys"
+                                                                                        class="btn btn-primary auditor-only audit-notes-update-button"
+                                                                                        type="button">Rename
+                                                                                        System</button>
+                                                                                    <button id="btnCancelSysCreate"
+                                                                                        class="btn btn-primary auditor-only audit-notes-update-button"
+                                                                                        type="button">Cancel</button>
+                                                                                    <br><br>
+                                                                                    <div id="createsyswarning"
+                                                                                        class="audit-notes-warning">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div aria-labelledby="auditDetailModal"
+                                                                        role="dialog" tabindex="-1" id="modalSysDelete"
+                                                                        class="modal fade control-modal">
+                                                                        <div class="modal-dialog modal-lg">
+                                                                            <div class="modal-content">
+                                                                                <div
+                                                                                    class="modal-header control-modal-header">
+                                                                                    <h3>
+                                                                                        Delete System
+                                                                                    </h3>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="modal-body control-modal-body">
+                                                                                    <div id="deletesystxt"></div>
+                                                                                    <button id="btnDeleteSys"
+                                                                                        class="btn btn-primary auditor-only audit-notes-update-button"
+                                                                                        type="button">Delete</button>
+                                                                                    <button id="btnCancelSysDelete"
+                                                                                        class="btn btn-primary auditor-only audit-notes-update-button"
+                                                                                        type="button">Cancel</button>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div aria-labelledby="auditDetailModal"
+                                                                        role="dialog" id="modalSysMove"
+                                                                        class="modal fade control-modal">
+                                                                        <div class="modal-dialog modal-lg">
+                                                                            <div class="modal-content">
+                                                                                <div
+                                                                                    class="modal-header control-modal-header">
+                                                                                    <h3>
+                                                                                        Move System to New Organization
+                                                                                    </h3>
+                                                                                </div>
+                                                                                <div
+                                                                                    class="modal-body control-modal-body">
+                                                                                    <span
+                                                                                        style="margin: 0 10px 0 0;"></span>New
+                                                                                    Parent Organization:
+                                                                                    <div id="orgselectdropdown"
+                                                                                        class="splunk-view splunk-dropdown splunk-choice-input"
+                                                                                        data-view="splunkjs/mvc/dropdownview">
+                                                                                        <div>
+                                                                                            <div
+                                                                                                class="sc-core_sc70dfcf67072b87b9AxjAm core_sc70dfcf67072b87b9boSfsz">
+                                                                                                <div style="width: 200px; display: flex;"
+                                                                                                    version="2"
+                                                                                                    data-component="splunk-core:/splunkjs/mvc/components/Dropdown">
+                                                                                                    <button
+                                                                                                        data-test="select"
+                                                                                                        type="button"
+                                                                                                        aria-haspopup="true"
+                                                                                                        role="listbox"
+                                                                                                        aria-label="Select..."
+                                                                                                        aria-labelledby=""
+                                                                                                        aria-multiselectable="false"
+                                                                                                        data-select-appearance="toggle"
+                                                                                                        disabled=""
+                                                                                                        style="flex: 1 0 0%; min-width: 0px;"
+                                                                                                        label="Select..."
+                                                                                                        aria-expanded="false"
+                                                                                                        data-test-popover-id="popover-3be54c62-a284-4fb6-a49e-cdffa2a499dc"
+                                                                                                        id="toggle-5df82ece-540b-488c-b02d-f371311039c6"
+                                                                                                        class="ClickableStyles__StyledA-sc-7al1vw-0 core_sc70dfcf67072b87b9kNNUXQ ButtonSimpleStyles__StyledClickable-vlarwe-0 core_sc70dfcf67072b87b9jOPXmR ButtonStyles__StyledButtonSimple-eqxqs2-1 core_sc70dfcf67072b87b9PXeTE SelectBaseStyles__StyledButton-sc-16cj7sk-0 core_sc70dfcf67072b87b9dnnLGU"><span
+                                                                                                            class="ButtonStyles__StyledContentWrapper-eqxqs2-2 core_sc70dfcf67072b87b9eDyzwP"><span
+                                                                                                                data-test="label"
+                                                                                                                class="ButtonStyles__StyledLabel-eqxqs2-3 core_sc70dfcf67072b87b9kfoTXg">Select...</span><span
+                                                                                                                class="ButtonStyles__StyledCaretWrapper-eqxqs2-4 core_sc70dfcf67072b87b9iIxDVZ"><svg
+                                                                                                                    focusable="false"
+                                                                                                                    height="0.3184em"
+                                                                                                                    width="0.5000em"
+                                                                                                                    viewBox="0 0 1063 677"
+                                                                                                                    aria-hidden="true"
+                                                                                                                    preserveAspectRatio="xMidYMid"
+                                                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                                                    class="SVG__InlineSVG-sc-13m0oii-0 core_sc70dfcf67072b87b9WJLyH SVGInternal__StyledSVG-ksy9g7-0 core_sc70dfcf67072b87b9drZOOP">
+                                                                                                                    <path
+                                                                                                                        d="M458.024 633l-397-458c-35-41-61-72-61-102-1-43 30-73 73-73h918c43 0 71 30 71 73 0 30-13 58-43 94l-415 466c-32 35-47 44-73 44-22 0-37-9-73-44z">
+                                                                                                                    </path>
+                                                                                                                </svg></span></span></button>
+                                                                                                </div>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="splunk-choice-input-message">
+                                                                                            <div
+                                                                                                class="sc-core_sc70dfcf67072b87b9AxjAm core_sc70dfcf67072b87b9boSfsz">
+                                                                                                <span
+                                                                                                    data-test="tooltip"
+                                                                                                    data-test-open="false"
+                                                                                                    data-test-popover-id="popover-acdad2c6-3b88-402b-9727-834f2e52dad1"
+                                                                                                    version="2"
+                                                                                                    data-component="splunk-core:/splunkjs/mvc/components/ChoiceViewMessage"
+                                                                                                    class="TooltipStyles__StyledInline-sc-67fvgm-1 core_sc70dfcf67072b87b9hwAyHp"><span
+                                                                                                        data-test="toggle"
+                                                                                                        class="TooltipStyles__StyledToggleInline-sc-67fvgm-3 core_sc70dfcf67072b87b9gJJbtD"><span
+                                                                                                            describedby="aria-id-1f5d7ef3-8c56-45e3-8682-50bf00b81336"
+                                                                                                            aria-describedby="aria-id-1f5d7ef3-8c56-45e3-8682-50bf00b81336">
+                                                                                                            <div
+                                                                                                                style="font-size: 13px; height: 0px; overflow: visible;">
+                                                                                                                Could
+                                                                                                                not
+                                                                                                                create
+                                                                                                                search.
+                                                                                                            </div>
+                                                                                                        </span><span
+                                                                                                            data-test="screen-reader-content"
+                                                                                                            id="aria-id-1f5d7ef3-8c56-45e3-8682-50bf00b81336"
+                                                                                                            class="ScreenReaderContentStyles__Styled-sc-1lnohwp-0 core_sc70dfcf67072b87b9iyOcmC">Search
+                                                                                                            is waiting
+                                                                                                            for
+                                                                                                            input...</span></span></span>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                        <div
+                                                                                            class="modal risky-command-dialog">
+                                                                                        </div>
+                                                                                    </div>
+                                                                                    <span
+                                                                                        style="margin: 0 10px 0 0;"></span><button
+                                                                                        id="btnMoveSys"
+                                                                                        class="btn btn-primary auditor-only audit-notes-update-button"
+                                                                                        type="button">Move
+                                                                                        System</button>
+                                                                                    <button id="btnCancelSysMove"
+                                                                                        class="btn btn-primary auditor-only audit-notes-update-button"
+                                                                                        type="button">Cancel</button>
+                                                                                    <br><br><span
+                                                                                        style="margin: 0 10px 0 0;"></span>
+                                                                                    <div id="movesyswarning"
+                                                                                        class="audit-notes-warning">
+                                                                                    </div>
+                                                                                </div>
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </section>
+                                            </div>
+                                        </div>
+                                        <div aria-labelledby="auditDetailModal" role="dialog" tabindex="-1"
+                                            id="modalOrgCreate" class="modal fade control-modal">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header control-modal-header">
+                                                        <h3>
+                                                            <div id="tableheader">Add New Organization to: Qmulos</div>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="modal-body control-modal-body">
+                                                        Organization Name:
+                                                        <input id="txtorgname"
+                                                            style="width:175px;margin-bottom:0px;margin-left:4px;margin-right:5px;"
+                                                            name="orgnametxtbox" type="text">
+                                                        <button id="btnCreateOrg"
+                                                            class="btn btn-primary auditor-only audit-notes-update-button"
+                                                            type="button">Create Organization</button>
+                                                        <button id="btnRenameOrg"
+                                                            class="btn btn-primary auditor-only audit-notes-update-button"
+                                                            type="button">Rename Organization</button>
+                                                        <button id="btnCancelOrgCreate"
+                                                            class="btn btn-primary auditor-only audit-notes-update-button"
+                                                            type="button">Cancel</button> <br><br>
+                                                        <div id="createwarning" class="audit-notes-warning"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div aria-labelledby="auditDetailModal" role="dialog" tabindex="-1"
+                                            id="modalOrgDelete" class="modal fade control-modal">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header control-modal-header">
+                                                        <h3>
+                                                            Delete Organization
+                                                        </h3>
+                                                    </div>
+                                                    <div class="modal-body control-modal-body">
+                                                        <div id="deletetxt"></div>
+                                                        <button id="btnDeleteOrg"
+                                                            class="btn btn-primary auditor-only audit-notes-update-button"
+                                                            type="button">Delete</button>
+                                                        <button id="btnCancelOrgDelete"
+                                                            class="btn btn-primary auditor-only audit-notes-update-button"
+                                                            type="button">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div aria-labelledby="auditDetailModal" role="dialog" tabindex="-1"
+                                            id="modalSysCreate" class="modal fade control-modal">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header control-modal-header">
+                                                        <h3>
+                                                            <div id="systableheader">Add New Organization to: Qmulos
+                                                            </div>
+                                                        </h3>
+                                                    </div>
+                                                    <div class="modal-body control-modal-body">
+                                                        System Name:
+                                                        <input id="txtsysname"
+                                                            style="width:175px;margin-bottom:0px;margin-left:4px;margin-right:5px;"
+                                                            name="sysnametxtbox" type="text">
+                                                        <button id="btnCreateSys"
+                                                            class="btn btn-primary auditor-only audit-notes-update-button"
+                                                            type="button">Create System</button>
+                                                        <button id="btnRenameSys"
+                                                            class="btn btn-primary auditor-only audit-notes-update-button"
+                                                            type="button">Rename System</button>
+                                                        <button id="btnCancelSysCreate"
+                                                            class="btn btn-primary auditor-only audit-notes-update-button"
+                                                            type="button">Cancel</button> <br><br>
+                                                        <div id="createsyswarning" class="audit-notes-warning"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div aria-labelledby="auditDetailModal" role="dialog" tabindex="-1"
+                                            id="modalSysDelete" class="modal fade control-modal">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header control-modal-header">
+                                                        <h3>
+                                                            Delete System
+                                                        </h3>
+                                                    </div>
+                                                    <div class="modal-body control-modal-body">
+                                                        <div id="deletesystxt"></div>
+                                                        <button id="btnDeleteSys"
+                                                            class="btn btn-primary auditor-only audit-notes-update-button"
+                                                            type="button">Delete</button>
+                                                        <button id="btnCancelSysDelete"
+                                                            class="btn btn-primary auditor-only audit-notes-update-button"
+                                                            type="button">Cancel</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div aria-labelledby="auditDetailModal" role="dialog" id="modalSysMove"
+                                            class="modal fade control-modal">
+                                            <div class="modal-dialog modal-lg">
+                                                <div class="modal-content">
+                                                    <div class="modal-header control-modal-header">
+                                                        <h3>
+                                                            Move System to New Organization
+                                                        </h3>
+                                                    </div>
+                                                    <div class="modal-body control-modal-body">
+                                                        <span style="margin: 0 10px 0 0;"></span>New Parent
+                                                        Organization:
+                                                        <div id="orgselectdropdown"
+                                                            class="splunk-view splunk-dropdown splunk-choice-input"
+                                                            data-view="splunkjs/mvc/dropdownview">
+                                                            <div>
+                                                                <div
+                                                                    class="sc-core_sc70dfcf67072b87b9AxjAm core_sc70dfcf67072b87b9boSfsz">
+                                                                    <div style="width: 200px; display: flex;"
+                                                                        version="2"
+                                                                        data-component="splunk-core:/splunkjs/mvc/components/Dropdown">
+                                                                        <button data-test="select" type="button"
+                                                                            aria-haspopup="true" role="listbox"
+                                                                            aria-label="Select..." aria-labelledby=""
+                                                                            aria-multiselectable="false"
+                                                                            data-select-appearance="toggle" disabled=""
+                                                                            style="flex: 1 0 0%; min-width: 0px;"
+                                                                            label="Select..." aria-expanded="false"
+                                                                            data-test-popover-id="popover-3be54c62-a284-4fb6-a49e-cdffa2a499dc"
+                                                                            id="toggle-5df82ece-540b-488c-b02d-f371311039c6"
+                                                                            class="ClickableStyles__StyledA-sc-7al1vw-0 core_sc70dfcf67072b87b9kNNUXQ ButtonSimpleStyles__StyledClickable-vlarwe-0 core_sc70dfcf67072b87b9jOPXmR ButtonStyles__StyledButtonSimple-eqxqs2-1 core_sc70dfcf67072b87b9PXeTE SelectBaseStyles__StyledButton-sc-16cj7sk-0 core_sc70dfcf67072b87b9dnnLGU"><span
+                                                                                class="ButtonStyles__StyledContentWrapper-eqxqs2-2 core_sc70dfcf67072b87b9eDyzwP"><span
+                                                                                    data-test="label"
+                                                                                    class="ButtonStyles__StyledLabel-eqxqs2-3 core_sc70dfcf67072b87b9kfoTXg">Select...</span><span
+                                                                                    class="ButtonStyles__StyledCaretWrapper-eqxqs2-4 core_sc70dfcf67072b87b9iIxDVZ"><svg
+                                                                                        focusable="false"
+                                                                                        height="0.3184em"
+                                                                                        width="0.5000em"
+                                                                                        viewBox="0 0 1063 677"
+                                                                                        aria-hidden="true"
+                                                                                        preserveAspectRatio="xMidYMid"
+                                                                                        xmlns="http://www.w3.org/2000/svg"
+                                                                                        class="SVG__InlineSVG-sc-13m0oii-0 core_sc70dfcf67072b87b9WJLyH SVGInternal__StyledSVG-ksy9g7-0 core_sc70dfcf67072b87b9drZOOP">
+                                                                                        <path
+                                                                                            d="M458.024 633l-397-458c-35-41-61-72-61-102-1-43 30-73 73-73h918c43 0 71 30 71 73 0 30-13 58-43 94l-415 466c-32 35-47 44-73 44-22 0-37-9-73-44z">
+                                                                                        </path>
+                                                                                    </svg></span></span></button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                            <div class="splunk-choice-input-message">
+                                                                <div
+                                                                    class="sc-core_sc70dfcf67072b87b9AxjAm core_sc70dfcf67072b87b9boSfsz">
+                                                                    <span data-test="tooltip" data-test-open="false"
+                                                                        data-test-popover-id="popover-acdad2c6-3b88-402b-9727-834f2e52dad1"
+                                                                        version="2"
+                                                                        data-component="splunk-core:/splunkjs/mvc/components/ChoiceViewMessage"
+                                                                        class="TooltipStyles__StyledInline-sc-67fvgm-1 core_sc70dfcf67072b87b9hwAyHp"><span
+                                                                            data-test="toggle"
+                                                                            class="TooltipStyles__StyledToggleInline-sc-67fvgm-3 core_sc70dfcf67072b87b9gJJbtD"><span
+                                                                                describedby="aria-id-1f5d7ef3-8c56-45e3-8682-50bf00b81336"
+                                                                                aria-describedby="aria-id-1f5d7ef3-8c56-45e3-8682-50bf00b81336">
+                                                                                <div
+                                                                                    style="font-size: 13px; height: 0px; overflow: visible;">
+                                                                                    Could not create search.</div>
+                                                                            </span><span
+                                                                                data-test="screen-reader-content"
+                                                                                id="aria-id-1f5d7ef3-8c56-45e3-8682-50bf00b81336"
+                                                                                class="ScreenReaderContentStyles__Styled-sc-1lnohwp-0 core_sc70dfcf67072b87b9iyOcmC">Search
+                                                                                is waiting for
+                                                                                input...</span></span></span>
+                                                                </div>
+                                                            </div>
+                                                            <div class="modal risky-command-dialog"></div>
+                                                        </div>
+                                                        <span style="margin: 0 10px 0 0;"></span><button id="btnMoveSys"
+                                                            class="btn btn-primary auditor-only audit-notes-update-button"
+                                                            type="button">Move System</button>
+                                                        <button id="btnCancelSysMove"
+                                                            class="btn btn-primary auditor-only audit-notes-update-button"
+                                                            type="button">Cancel</button> <br><br><span
+                                                            style="margin: 0 10px 0 0;"></span>
+                                                        <div id="movesyswarning" class="audit-notes-warning"></div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -1171,9 +1698,11 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </div>
-
+    <div class="loader-wrapper">
+        <div class="loader"></div>
     </div>
     <div class="modal-backdrop fade in"></div>
 
@@ -1497,90 +2026,6 @@
         </div>
     </div>
 </div>
-<!-- <div class="modal fade control-modal" id="modalOrgSelect" tabindex="-1"
-role="dialog" aria-labelledby="auditDetailModal" style="display: none;"
-aria-hidden="true">
-<div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div id="orgselecttitle" class="modal-header control-modal-header">
-            <h3>Select an Organization and System</h3>
-        </div>
-        <div class="modal-body control-modal-body">
-            <table style="width:100%;">
-                <tbody>
-                    <tr>
-                        <td style="width:49%;">
-                            <div id="orgnav"><a id="org_0" class="btn-pill"
-                                    dataval="0">Global</a> &gt;<b><a id="org_1"
-                                        class="btn-pill" dataval="1"
-                                        dataparents="">Qmulos</a></b></div>
-                        </td>
-                        <td id="divsplitter" style="width:2%;"></td>
-                        <td id="sysnavtd" style="width:49%;" class="">
-                            <div id="sysnav"></div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td id="orgchildren"
-                            style="border: 1px solid;border-color:silver;padding: 10px 10px 10px 10px;width:49%;vertical-align:top;">
-                            Qmulos Organizations: <br><a id="org_11"
-                                class="btn-pill" dataval="11" dataparents=""
-                                dataparent="">Headquarters</a><a id="org_187"
-                                class="btn-pill" dataval="187" dataparents=""
-                                dataparent="">Qmulos APAC</a><a id="org_9"
-                                class="btn-pill" dataval="9" dataparents=""
-                                dataparent="">Qmulos CA</a><a id="org_250"
-                                class="btn-pill" dataval="250" dataparents=""
-                                dataparent="">Qmulos Commercial</a><a id="org_8"
-                                class="btn-pill" dataval="8" dataparents=""
-                                dataparent="">Qmulos DC</a><a id="org_10"
-                                class="btn-pill" dataval="10" dataparents=""
-                                dataparent="">Qmulos NM</a></td>
-                        <td id="divsplitter" style="width:2%;"></td>
-                        <td id="" class=""
-                            style="width:49%;border: 1px solid;border-color:silver;padding: 10px 10px 10px 10px;vertical-align:top;">
-                            Qmulos Systems: <br><a id="sys_326" class="btn-pill"
-                                dataval="326" datalvl="system">800-53 Rev
-                                5</a><a id="sys_273" class="btn-pill"
-                                dataval="273" datalvl="system">CMMC 2.0</a><a
-                                id="sys_228" class="btn-pill" dataval="228"
-                                datalvl="system">Customer</a><a id="sys_173"
-                                class="btn-pill" dataval="173"
-                                datalvl="system">Linux</a><a id="sys_327"
-                                class="btn-pill" dataval="327"
-                                datalvl="system">MITRE ATTACK</a><a id="sys_331"
-                                class="btn-pill" dataval="331"
-                                datalvl="system">MITRE D3FEND</a><a id="sys_193"
-                                class="btn-pill" dataval="193"
-                                datalvl="system">NERC CIP</a><a id="sys_238"
-                                class="btn-pill" dataval="238"
-                                datalvl="system">OMB M-21-31</a><a id="sys_340"
-                                class="btn-pill" dataval="340"
-                                datalvl="system">OMB M-22-09</a><a id="sys_147"
-                                class="btn-pill" dataval="147"
-                                datalvl="system">Q Test System</a><a id="sys_81"
-                                class="btn-pill" dataval="81"
-                                datalvl="system">Splunk</a><a id="sys_5"
-                                class="btn-pill" dataval="5"
-                                datalvl="system">Windows</a></td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        <div id="buttons" class="modal-footer control-modal-footer">
-            <div id="orgselwarning" class="audit-notes-warning"></div>
-            <button type="button" class="btn btn-primary hidden"
-                id="btnResetOrgSelect">Reset Filter</button>
-            <button type="button" class="btn btn-primary" id="btnSelectOrg"
-                disabled="">Select Organization and System</button>
-            <button type="button" class="btn btn-primary"
-                id="btnCancelOrgSelect">Cancel</button>
-            <br>
-            <div class="audit-notes-warning" id="createwarning"></div>
-        </div>
-    </div>
-</div>
-</div>  -->
 
 
 </html>
