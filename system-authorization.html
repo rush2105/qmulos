@@ -1110,7 +1110,7 @@
                                 <div class="" id="ATO_information_div">
                                     <div style="float: left; margin: 10px; border-color: rgb(92, 192, 92);" id="ATO_status_block">
                                         <span style="font-size:100px;" id="auth_icon">
-                                            <i id="status-icon-ii" class="fa-regular fa-circle-check fa-1x" style="color:#5cc05c;margin-right:10px;"></i>
+                                            <i id="status-icon-ii" class="fa-solid fa-question fa-1x" style="color:#e67e22;margin-right:10px;"></i>
                                            
                                     </div>
                                     <div style="float:left;margin:10px;font-size:15px;" id="ATO_info" class="">
@@ -1147,7 +1147,7 @@
                                     <div style="flex:1; padding-top:20px;" id="workflow-history-table-container"><div class="flex flex-row alignitems-center justify-between panel-title"><h2 class="panel-title" style="padding: 0px 12px;">Approval Workflow History</h2><div class="flex flex-row"><div id="auth-table-button-container" style="padding: 3.5px 6px 3px;"><button id="start-approval-workflow-button" style="padding: 3px 14px;" class="btn btn-primary btn-small create-element">Initiate Approval Workflow</button></div><div id="watch-btn-container" style="padding: 3.5px 6px 3px;"></div></div></div><div id="workflow-history-table" class="splunk-view splunk-table" style="position: relative;"><div class="shared-reportvisualizer"><table class="table table-chrome table-striped wrapped-results"><thead class="shared-resultstable-resultstableheader"><tr><th class="sorts">Updated On<i class="icon-sorts"></i></th><th class="sorts">Activity<i class="icon-sorts"></i></th><th class="sorts">Comments<i class="icon-sorts"></i></th></tr></thead><tbody><tr class="jsgrid-nodata-row"><td class="string" colspan="3">No workflow history found for the current system.</td></tr></tbody></table></div><div class="splunk-view splunk-paginator" style="display: none;"><a href="javascript:void(0);">« prev</a>  <a href="javascript:void(0);">next »</a> </div><div class="jsgrid-load-shader" style="display: none; position: absolute; inset: 0px; z-index: 1000;"></div><div class="jsgrid-load-panel" style="display: none; position: absolute; top: 50%; left: 50%; z-index: 1000;">Please, wait...</div></div></div>
                                 </div>
                             </div>
-                            <div style="padding-top:20px;">
+                            <div style="padding-top:20px;" id="aajao">
                                 <div>
                                     <h2 class="panel-title">Security Assessment Information</h2>
                                 </div>
@@ -1539,6 +1539,114 @@
         </div>
     </div>
 </div>
+<div aria-hidden="false" role="dialog" tabindex="-1" id="modal_ato_workflow" class="modal fade control-modal modal-wide in" style="display: block;">  
+    <div role="document" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <div class="flex flex-row flex-wrap" id="ato_steps_header"><div class="step active" style="width: 50%;"><div class="step-wrapper"><div class="step-title" style="overflow: hidden; text-overflow: ellipsis;">Submitted</div></div></div><div class="step todo" style="width: 50%;"><div class="step-wrapper"><div class="step-title" style="overflow: hidden; text-overflow: ellipsis;">Final Approval</div></div></div></div>
+            </div>
+            <div class="modal-body modal-body-scrolling">
 
+                <form class="form-horizontal" id="ato_inputs">
+                    <div class="control-group initial intermediate final">
+                        <label class="control-label" for="ato_current_state">Current State</label>
+                        <div class="controls">
+                            <input value="Tertiary State" disabled="true" class="control input-block-level" type="text" id="ato_current_state">
+                        </div>
+                    </div>
+                    <div class="control-group initial intermediate">
+                        <label class="control-label" for="ato_comments">Comments</label>
+                        <div class="controls">
+                            <textarea placeholder="Optional..." class="control input-block-level" id="ato_comments"></textarea>
+                        </div>
+                    </div>
+                   <div class="control-group intermediate final hidden">
+                        <label id="ato_accept_reject_label" for="ato_accept_reject" class="control-label">
+                            Next Steps
+                        </label>
 
+                        <div class="controls controls-join" aria-labelledby="ato_accept_reject_label">
+                            <div id="ato_accept_reject" class="control btn-group btn-group-radio shared-controls-booleanradiocontrol control-default">
+
+                                <button aria-pressed="false" class="btn" aria-label="Reject" id="ato_workflow_reject" role="button" type="button">
+                                    Reject
+                                </button>
+                                <button aria-pressed="false" class="btn" aria-label="Accept" id="ato_workflow_accept" role="button" type="button">
+                                    Accept
+                                </button>
+                            </div>
+                        </div>
+                        <div class="help-block" id="ato_accept_reject_help"></div>
+                    </div>
+
+                    <div class="hidden control-group" id="reject_followup_wrapper">
+                        <label class="control-label" for="ato_workflow_reject_followup">Revert To</label>
+                        <div class="controls">
+                            <select disabled="" class="control input-block-level" type="text" id="ato_workflow_reject_followup"></select>
+                        </div>
+                        <div class="help-block" id="ato_workflow_reject_followup_help"></div>
+                    </div>
+
+                    <div class="control-group initial" id="accept_followup_wrapper">
+                        <label class="control-label" for="ato_workflow_accept_followup">
+                            Assign <span data-text-val="next-state-name">Final Approval</span> To
+                        </label>
+                        <div class="controls">
+                            <select class="control input-block-level" type="text" id="ato_workflow_accept_followup"><option value="" disabled="disabled" selected="selected">Select an Assignee...</option><option value="678a1509f5ec1394b90342d2">adestromp</option><option value="678a1509f5ec1394b90342d3">adm-augaz</option><option value="678a1509f5ec1394b90342d4">adm-carlo</option><option value="678a1509f5ec1394b90342d5">adm-cscott</option><option value="678a1509f5ec1394b90342d6">adm-daniel</option><option value="678a1509f5ec1394b90342d7">adm-jdawson</option><option value="678a1509f5ec1394b90342d8">adm-jnektalov</option><option value="678a1509f5ec1394b90342d9">adm-kelvin</option><option value="678a1509f5ec1394b90342da">adm-kyle</option><option value="678a1509f5ec1394b90342db">adm-matt</option><option value="678a1509f5ec1394b90342dc">adm-mcananzucker</option><option value="678a1509f5ec1394b90342dd">adm-rutger</option><option value="678a1509f5ec1394b90342de">adm-swhipkey</option><option value="678a1509f5ec1394b90342df">adm-tieu</option><option value="678a1509f5ec1394b90342e0">admin</option><option value="678a1509f5ec1394b90342e6">akhbar</option><option value="678a1509f5ec1394b90342fc">andy.wentsel</option><option value="678a1509f5ec1394b903430c">auto_test_user</option><option value="678a1509f5ec1394b9034311">bchavis</option><option value="678a1509f5ec1394b9034318">bmesa</option><option value="678a1509f5ec1394b903432a">brian.hartpence</option><option value="678a1509f5ec1394b903433c">carlos.santiago</option><option value="678a1509f5ec1394b903435a">clai</option><option value="678a1509f5ec1394b903436a">cscott</option><option value="678a1509f5ec1394b903436b">cscott_splunk</option><option value="678a1509f5ec1394b903436e">cviqueira</option><option value="678a1509f5ec1394b9034380">dbagley</option><option value="678a1509f5ec1394b903438f">dletchev</option><option value="678a1509f5ec1394b9034390">dod_user</option><option value="678a1509f5ec1394b90343e6">jayoh.joe</option><option value="678a1509f5ec1394b90343e7">jayoh.rushik</option><option value="678a1509f5ec1394b90343ec">jdawson</option><option value="678a1509f5ec1394b9034401">jnektalov</option><option value="678a1509f5ec1394b903441f">jyang</option><option value="678a1509f5ec1394b9034421">kal.baka</option><option value="678a1509f5ec1394b9034435">kkennedy</option><option value="678a1509f5ec1394b9034436">klawrence</option><option value="678a1509f5ec1394b903443c">ksubramanian</option><option value="678a1509f5ec1394b9034442">lab universal admins</option><option value="678a1509f5ec1394b9034454">mark.hernandez</option><option value="678a1509f5ec1394b9034460">matthew.peterson</option><option value="678a1509f5ec1394b9034468">mcoose</option><option value="678a1509f5ec1394b9034470">mhickey</option><option value="678a1509f5ec1394b9034471">mhopke</option><option value="678a1509f5ec1394b90344b5">qmulos_user</option><option value="678a1509f5ec1394b90344e0">rutger_local</option><option value="678a1509f5ec1394b903450e">splunkbackup</option><option value="678a1509f5ec1394b903450f">splunksedemo</option><option value="678a1509f5ec1394b9034521">svc-qmbk</option><option value="678a1509f5ec1394b9034522">swhipkey</option><option value="678a1509f5ec1394b903452e">test</option><option value="678a1509f5ec1394b903452f">test.user</option><option value="678a1509f5ec1394b9034538">tieu_test</option><option value="678a1509f5ec1394b903453e">tluu</option></select>
+                        </div>
+                        <div class="help-block" id="ato_workflow_accept_followup_help"></div>
+                    </div>
+
+                    <div class="hidden control-group" id="final_authorization_wrapper">
+                        <div class="control-group final hidden">
+                            <label class="control-label" for="ato_final_auth_status">
+                                Authorization Status:
+                            </label>
+                            <div class="controls">
+                                <select class="control input-block-level" id="ato_final_auth_status">
+                                </select>
+                            </div>
+                            <div class="help-block" id="ato_final_auth_status_help"></div>
+                        </div>
+                        <div class="control-group final hidden">
+                            <label class="control-label" for="ato_final_issue_date">
+                                Issue Date:
+                            </label>
+                            <div class="controls">
+                                <input class="control" type="date" id="ato_final_issue_date">
+                            </div>
+                            <div class="help-block" id="ato_final_issue_date_help"></div>
+                        </div>
+                        <div class="control-group final hidden">
+                            <label class="control-label" for="ato_final_expiration_date">
+                                Expiration Date:
+                            </label>
+                            <div class="controls">
+                                <input class="control" type="date" id="ato_final_expiration_date">
+                            </div>
+                            <div class="help-block" id="ato_final_expiration_date_help"></div>
+                        </div>
+                        <div class="control-group final hidden">
+                            <label class="control-label" for="ato_final_terms">
+                                Terms and Conditions:
+                            </label>
+                            <div class="controls">
+                                <textarea class="control input-block-level" id="ato_final_terms">                                                </textarea>
+                            </div>
+                            <div class="help-block" id="ato_final_terms_help"></div>
+                        </div>
+                    </div>
+                 
+                </form>                                                    
+            </div>
+
+            <div class="modal-footer">
+                <div style="color: red;display: inline-block;text-align: left;padding-right: 30px;" id="ato_inputs_warning"></div>
+                <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                <button class="btn btn-primary" form="ato_inputs" type="submit" id="ato_workflow_submit_btn">Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal-backdrop fade in"></div>
 </html>

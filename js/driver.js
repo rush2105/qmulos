@@ -30,6 +30,7 @@ $(document).ready(function () {
                 $('.modal-backdrop.fade.in').toggleClass('open');
         });
         $('#btnSelectOrgInitial,#btnSelectOrgInitial-2').click(function (e) {
+             
                 $('#modalOrgSelect.sssss').toggleClass('open');
                 $('.modal-backdrop.fade.in').toggleClass('open');
                 $('#org_2121').click(function (e) {
@@ -41,7 +42,7 @@ $(document).ready(function () {
                         $('.nav-latter').toggleClass('boom');
                            $('#orgchildren').toggleClass('limited');
                 });
-
+        
 
         });
 

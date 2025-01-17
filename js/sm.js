@@ -119,6 +119,30 @@ document.addEventListener("DOMContentLoaded", function () {
                     showButtons: ['close', 'previous', 'next']
                 }
             },
+      
+           
+            {
+                element: '#cg-baseline',
+                popover: {
+                    title: 'Next, select a baseline to apply to the system, if applicable,',
+                    description: 'If applicable',
+                    side: 'top',
+                    align: 'start',
+                    doneBtnText: 'Next',
+                    showButtons: ['close', 'previous', 'next']
+                }
+            },
+            {
+                element: '#og-wrapps',
+                popover: {
+                    title: 'Now Select an overlay. Then hit save changes.',
+                    description: '',
+                    side: 'top',
+                    align: 'start',
+                    doneBtnText: 'Next',
+                    showButtons: ['close', 'previous', 'next']
+                }
+            },
             {
              
                 popover: {
@@ -132,9 +156,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             },
             {
-                element: '#custombaseselect',
+                element: '#controltable',
                 popover: {
-                    title: 'Select Overlay and Hit Save changes',
+                    title: 'Current Applicable Controls section',
                     description: '',
                     side: 'top',
                     align: 'start',
@@ -143,29 +167,49 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             },
             {
-                element: '#systemattributesrow',
                 popover: {
-                    title: 'Now Explore System Attributes here',
-                    description: '',
+                    title: '',
+                    description: 'Now let’s look at an individual control for your system by navigating to the Control Compliance Hub.',
                     side: 'top',
                     align: 'start',
                     doneBtnText: 'Next',
                     showButtons: ['close', 'previous', 'next']
                 }
-            }
+            },
+            {
+                element: '#ivc-cch',
+                popover: {
+                    title: 'Click Control Compliance Hub',
+                    description: '',
+                    side: 'top',
+                    align: 'start',
+                    doneBtnText: 'Next',
+                    showButtons: ['close', 'previous']
+                }
+            },
+            
         ],
         onCloseClick: () => {
             driverObj.destroy();
         },
         onPrevClick: (element, step, opts) => {
             const currentStep = driverObj.getActiveIndex();
-            if (currentStep > 0) {
+            if (currentStep === 10) { // If going back from last step
+                $('#ivc-control').click();
+                setTimeout(() => {
+                    driverObj.drive(currentStep - 1);
+                }, 500);
+            }
+            else if (currentStep === 6) { // If going back from step 6
+                driverObj.drive(0); // Go to step 2 (index 1)
+            }
+            else {
                 driverObj.drive(currentStep - 1);
             }
         },
         onNextClick: (element, step, opts) => {
             const currentStep = driverObj.getActiveIndex();
-           alert(currentStep);
+        //    alert(currentStep);
             if (currentStep === 0) {
                 const selectOrgButton = document.querySelector('#btnSelectOrgInitial');
                 if (selectOrgButton) {
@@ -202,42 +246,41 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
             else if (currentStep === 4) {
-                const selectOrgButton = document.querySelector('#btnSelectOrg');
-                if (selectOrgButton) {
-                    selectOrgButton.click();
-                    // Execute the script after clicking
-                    const orgNames = sessionStorage.getItem('orgName');
-                    $('#btnSelectOrgInitial').text(orgNames + ' / ' + 'Windows');
-                    $('#sys-manag-content').removeClass('none');
-                    $('#btnCancelOrgSelect').click();
-                    setTimeout(() => {
-                        driverObj.drive(5);
-                    }, 500);
-                }
-            }
-            else if (currentStep === 4) {
+               
                 $('#btnSelectOrg.real').click();
-                alert('clicked');
+             
+                   
+                
             }
+            else if (currentStep === 7) {
+                driverObj.drive(8);
+            }
+            else if (currentStep === 8) {
+                driverObj.drive(9);
+            }
+            else if (currentStep === 9) {
+                $('#ivc-control').click();
+                driverObj.drive(10);
+               
+                    // driverObj.drive(11);
+                
+            }
+         
             else if (currentStep === 5) {
-                // $('#btnCancelOrgSelect').click();
+                driverObj.drive(6);
                
             }
             else if (currentStep === 6) {
-                // $('#btnCancelOrgSelect').click();
-                // Check if custombaseselect has a value
-                const selectValue = $('#custombaseselect').val();
-                if (!selectValue || selectValue === '') {
-                    // If no value, set it to '41'
+               
                     $('#custombaseselect').val('41');
-                }
+                
                 // Trigger save button click
                 $('#btnSaveSystem').click();
                 setTimeout(() => {
                     driverObj.drive(7);
-                }, 8500);
+                }, 1500);
             }else{
-                alert(currentStep);
+               alert(currentStep);
             }
         }
     });
@@ -264,6 +307,12 @@ document.addEventListener("DOMContentLoaded", function () {
             driverObj.drive(3);
         }, 500);
     });
+    $('#btnSaveSystem').click(function(){
+        $('#custombaseselect').val('41');
+        setTimeout(() => {
+            driverObj.drive(7);
+        }, 500);
+    });
 
     // Add system selection click handler
     $('#sys_55555').click(function() {
@@ -274,12 +323,13 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // Add final step click handler
     $('#btnSelectOrg.real').click(function() {
-        const orgNames = sessionStorage.getItem('orgName');
+        const orgNames = sessionStorage.getItem('orgName') ?? "Qmulos";
+
         $('#btnSelectOrgInitial').text(orgNames + ' / ' + 'Windows');
         $('#sys-manag-content').removeClass('none');
         driverObj.destroy();
         setTimeout(() => {
-            driverObj.drive(6);
+            driverObj.drive(5);
         }, 2000);
             $('#btnCancelOrgSelect').click();
         
