@@ -132,13 +132,24 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             }
         ],
+        onHighlightStarted: (element,step) => {
+            const currentStep = driverObj.getActiveIndex();
+
+            sessionStorage.setItem('highlightStep', currentStep);
+
+        
+        },
         onCloseClick: () => {
             driverObj.destroy();
         },
         onPrevClick: (element, step, opts) => {
             const currentStep = driverObj.getActiveIndex();
-            if (currentStep > 0) {
+          
+            if (currentStep > 0 && currentStep != 8) {
                 driverObj.drive(currentStep - 1);
+            }
+            else if(currentStep === 8){
+              driverObj.drive(3);
             }
         },
         onNextClick: (element, step, opts) => {
@@ -151,7 +162,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 
               $('#assessment_status').click();
             }
-            else if(currentStep === 5){
+            else if(currentStep === 4){
                 document.querySelector('#assessment-new-status').scrollIntoView({ 
                     behavior: 'smooth',
                     block: 'center'
@@ -189,6 +200,39 @@ document.addEventListener("DOMContentLoaded", function () {
              
                 driverObj.drive(currentStep + 1);
             }
+        },
+        onDeselected: (element,step) => {
+            // sessionStorage.setItem('highlightStep', step.index);
+
+            // When tour is interrupted
+            setTimeout(() => {
+                // Create and show continue button if tour wasn't completed
+                if (!sessionStorage.getItem('tourCompleted')) {
+                    const continueBtn = document.createElement('button');
+                    continueBtn.innerHTML = 'Continue Tour';
+                    continueBtn.id = 'continueTourBtn';
+                    continueBtn.style.cssText = `
+                        position: fixed;
+                        bottom: 20px;
+                        right: 20px;
+                        padding: 10px 20px;
+                        background: #007a33;
+                        color: white;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        z-index: 1000;
+                    `;
+                    
+                    document.body.appendChild(continueBtn);
+                    
+                    continueBtn.addEventListener('click', () => {
+                        const savedStep = parseInt(sessionStorage.getItem('highlightStep')) || 0;
+                        driverObj.drive(savedStep);
+                        continueBtn.remove();
+                    });
+                }
+            }, 10000); // 10 seconds delay
         }
     });
 
@@ -218,13 +262,13 @@ $('#assessment-new-status').change(function() {
     }
 });
 
-$('#assessment_update_btn').click(function() {
+$('#assessment_update_btn.reals').click(function() {
     const currentStep = driverObj.getActiveIndex();
-    if (currentStep === 8) {
+  
         setTimeout(() => {
-            driverObj.drive(9);
+            driverObj.drive(8);
         }, 500);
-    }
+    
 });
 $('#assessment_status').click(function() {
     setTimeout(() => {

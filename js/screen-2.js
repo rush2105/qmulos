@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 $(document).ready(function () {
     $('#data-select').select2();
+ 
 });
 function saveStepToSession(step) {
     sessionStorage.setItem('currentStep', step);
@@ -88,6 +89,13 @@ document.addEventListener("DOMContentLoaded", function () {
         onCloseClick: () => {
             driverObj.destroy();
         },
+        onHighlightStarted: (element,step) => {
+            const currentStep = driverObj.getActiveIndex();
+
+            sessionStorage.setItem('highlightStep', currentStep);
+
+        
+        },
         onPrevClick: (element, step, opts) => {
             const currentStep = driverObj.getActiveIndex();
             if (currentStep > 0) {
@@ -119,10 +127,55 @@ document.addEventListener("DOMContentLoaded", function () {
                     }, 500);
                 }
             }
+        },
+        onDeselected: (element,step) => {
+            // sessionStorage.setItem('highlightStep', step.index);
+
+            // When tour is interrupted
+            setTimeout(() => {
+                // Create and show continue button if tour wasn't completed
+                if (!sessionStorage.getItem('tourCompleted')) {
+                    const continueBtn = document.createElement('button');
+                    continueBtn.innerHTML = 'Continue Tour';
+                    continueBtn.id = 'continueTourBtn';
+                    continueBtn.style.cssText = `
+                        position: fixed;
+                        bottom: 20px;
+                        right: 20px;
+                        padding: 10px 20px;
+                        background: #007a33;
+                        color: white;
+                        border: none;
+                        border-radius: 5px;
+                        cursor: pointer;
+                        z-index: 1000;
+                    `;
+                    
+                    document.body.appendChild(continueBtn);
+                    
+                    continueBtn.addEventListener('click', () => {
+                        const savedStep = parseInt(sessionStorage.getItem('highlightStep')) || 0;
+                        driverObj.drive(savedStep);
+                        continueBtn.remove();
+                    });
+                }
+            }, 10000); // 10 seconds delay
         }
     });
 
     driverObj.drive();
+    setTimeout(() => {
+        $('#data-select').on('change', function(e) {
+            // Check if driver instance exists and trigger third step
+         
+               driverObj.drive(2); // Index 2 represents the third step
+           
+        });
+       }, 2000);
+    $('#dtc-opener').click(function (e) {
+       
+        driverObj.destroy();
+    });
 });
 
 function scrollToElement(element) {

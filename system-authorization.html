@@ -30,7 +30,27 @@
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.0/css/all.min.css" integrity="sha512-9xKTRVabjVeZmc+GUW8GgSmcREDunMM+Dt/GrzchfN8tkwHizc5RP4Ok/MXFFy5rIjJjzhndFScTceq5e6GvVQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="">
-
+<style>
+#modal_ato_workflow.none {
+	display: none !important;
+}
+#ato_workflow_submit_btn {
+	width: 100px;
+	height: 33px;
+	line-height: 1;
+	border-radius: 5px !important;
+}
+.modal.modal-wide {
+	width: 1000px;
+	margin-left: -500px;
+}
+.modal.modal-wide .modal-dialog {
+	width: 100%;
+}
+.modal-body.modal-body-scrolling {
+	overflow: scroll;
+}
+</style>
 </head>
 
 
@@ -1155,7 +1175,7 @@
                                     <div style="float:left;width:33%;">
                                         <div style="border-radius: 10px;border: 3px solid;background: white;padding:10px;border-color: #d7d7da;margin:10px;text-align:center;">
                                             <div style="padding-bottom:20px;padding-top:10px;font-size:40px;">
-                                                <span id="true_assessment_score">92.83%</span>
+                                                <span id="true_assessment_score" class="acd" data-score="92.83%">0.83%</span>
                                             </div>
                                             <div style="clear:left;">True Assessment Score</div>
                                         </div>
@@ -1163,7 +1183,7 @@
                                     <div style="float:left;width:33%;">
                                         <div style="border-radius: 10px;border: 3px solid;background: white;padding:10px;border-color: #d7d7da;margin:10px;text-align:center;">
                                             <div style="padding-bottom:20px;padding-top:10px;font-size:40px;">
-                                                <span id="adjusted_assessment_score">93.18%</span>
+                                                <span id="adjusted_assessment_score" class="acd" data-score="93.18%">0.00%</span>
                                             </div>
                                             <div style="clear:left;">Adjusted Assessment Score</div>
                                         </div>
@@ -1171,7 +1191,7 @@
                                     <div style="float:left;width:33%;">
                                         <div style="border-radius: 10px;border: 3px solid;background: white;padding:10px;border-color: #d7d7da;margin:10px;text-align:center;">
                                             <div style="padding-bottom:20px;padding-top:10px;font-size:40px;">
-                                                <span id="assessment_review_percentage">99.62%</span>
+                                                <span id="assessment_review_percentage" class="acd" data-score="99.62%">00.62%</span>
                                             </div>
                                             <div style="clear:left;">Assessment Review Completion Percentage</div>
                                         </div>
@@ -1539,7 +1559,7 @@
         </div>
     </div>
 </div>
-<div aria-hidden="false" role="dialog" tabindex="-1" id="modal_ato_workflow" class="modal fade control-modal modal-wide in" style="display: block;">  
+<div aria-hidden="false" role="dialog" tabindex="-1" id="modal_ato_workflow" class="real none modal fade control-modal modal-wide in" style="display: block;">  
     <div role="document" class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -1643,7 +1663,7 @@
             <div class="modal-footer">
                 <div style="color: red;display: inline-block;text-align: left;padding-right: 30px;" id="ato_inputs_warning"></div>
                 <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
-                <button class="btn btn-primary" form="ato_inputs" type="submit" id="ato_workflow_submit_btn">Save</button>
+                <button class="btn btn-primary real" form="ato_inputs" type="submit" id="ato_workflow_submit_btn">Save</button>
             </div>
         </div>
     </div>
