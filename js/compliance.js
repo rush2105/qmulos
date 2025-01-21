@@ -1,5 +1,150 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const driver = window.driver.js.driver;
+
+    document.querySelectorAll('a').forEach(anchor => {
+        anchor.addEventListener('click', function (event) {
+            if (!anchor.classList.contains('no-lan')) {
+                event.preventDefault();
+            }
+        });
+    });
+
+});
+
+const driver = window.driver.js.driver;
+function createTourProgressBox() {
+    // Create main container
+    const progressBox = document.createElement('div');
+    progressBox.id = 'tourProgressBox';
+    progressBox.innerHTML = `
+        <div class="progress-header">
+            <span>Tour Progress</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="progress-content" style="display: none;">
+           
+            <ul class="progress-steps">
+                <li data-step="0" class="step-item">
+                    <i class="far fa-square"></i>
+                    <span>Introduction</span>
+                </li>
+                <li data-step="1" class="step-item">
+                    <i class="far fa-square"></i>
+                    <span>Table of Assigned Evidence Data</span>
+                </li>
+                <li data-step="2" class="step-item">
+                    <i class="far fa-square"></i>
+                    <span>Evidence Management</span>
+                </li>
+                <li data-step="3" class="step-item">
+                    <i class="far fa-square"></i>
+                    <span>Assessment Status</span>
+                </li>
+                <li data-step="4" class="step-item">
+                    <i class="far fa-square"></i>
+                    <span>Assessment Details</span>
+                </li>
+                <li data-step="6" class="step-item">
+                    <i class="far fa-square"></i>
+                    <span>New Assessment</span>
+                </li>
+                <li data-step="7" class="step-item">
+                    <i class="far fa-square"></i>
+                    <span>Save Assessment</span>
+                </li>
+                <li data-step="8" class="step-item">
+                    <i class="far fa-square"></i>
+                    <span>Assessment Status</span>
+                </li>
+                <li data-step="9" class="step-item">
+                    <i class="far fa-square"></i>
+                    <span>Control Status</span>
+                </li>
+                <li data-step="10" class="step-item">
+                    <i class="far fa-square"></i>
+                    <span>System Authorization</span>
+                </li>
+            
+            </ul>
+        </div>
+    `;
+
+    // Add styles
+    const styles = document.createElement('style');
+    styles.textContent = `
+        #tourProgressBox {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            min-width: 150px;
+            font-family: Arial, sans-serif;
+        }
+        .progress-header {
+            padding: 10px 15px;
+            background: #007a33;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .progress-content {
+            padding: 15px;
+            background: white;
+            border-radius: 0 0 5px 5px;
+        }
+        .progress-close {
+            text-align: right;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .progress-steps {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .step-item {
+            padding: 8px 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .step-item.completed {
+            text-decoration: line-through;
+        }
+        .step-item.completed i {
+            color: #007a33;
+        }
+    `;
+
+    document.head.appendChild(styles);
+    document.body.appendChild(progressBox);
+
+    // Event Listeners
+    const header = progressBox.querySelector('.progress-header');
+    const content = progressBox.querySelector('.progress-content');
+    
+
+    header.addEventListener('click', () => {
+        content.style.display = content.style.display === 'none' ? 'block' : 'none';
+        header.querySelector('i').classList.toggle('fa-chevron-down');
+        header.querySelector('i').classList.toggle('fa-chevron-up');
+    });
+
+  
+
+  
+
+    return progressBox;
+}
+
+document.addEventListener("DOMContentLoaded", function () {
+   
 
     const driverObj = new driver({
         popoverClass: 'driverjs-theme welcome-popup',
@@ -136,7 +281,14 @@ document.addEventListener("DOMContentLoaded", function () {
             const currentStep = driverObj.getActiveIndex();
 
             sessionStorage.setItem('highlightStep', currentStep);
-
+            const progressBox = document.querySelector('#tourProgressBox');
+            const steps = progressBox.querySelectorAll('.step-item');
+            // Mark all steps up to current step as completed
+            steps.forEach((stepItem, index) => {
+                if (index < currentStep) {
+                    stepItem.classList.add('completed');
+                }
+            });
         
         },
         onCloseClick: () => {
@@ -232,12 +384,37 @@ document.addEventListener("DOMContentLoaded", function () {
                         continueBtn.remove();
                     });
                 }
-            }, 10000); // 10 seconds delay
+            }, 1000); // 10 seconds delay
         }
     });
-
+    const progressBox = createTourProgressBox();
     // Start the tour
     driverObj.drive();
+    const steps = progressBox.querySelectorAll('.step-item');
+
+    steps.forEach(step => {
+        step.addEventListener('click', () => {
+       
+            const stepIndex = parseInt(step.dataset.step);
+           
+            if(stepIndex === 10){
+                   if(!$('#sys-o-opener').hasClass('open')){
+                    $('#sys-o-opener').addClass('open');
+                   }
+            }else{
+                $('#sys-o-opener').removeClass('open');
+            }
+            if(stepIndex === 4){
+$('#assessment_status').click();
+            }
+            if(stepIndex === 7 || stepIndex === 6){
+                driverObj.drive(3);
+            }else{
+
+            driverObj.drive(stepIndex);
+            }
+        });
+    });
 // 
 $('#evd-btn').click(function() {
     const currentStep = driverObj.getActiveIndex();
@@ -245,7 +422,7 @@ $('#evd-btn').click(function() {
         setTimeout(() => {
             driverObj.drive(4);
         }, 500);
-    }
+    }  
 });
 
 $('#assessment-new-status').change(function() {

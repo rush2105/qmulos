@@ -69,7 +69,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             },
             {
-                element: '#system-managemenet',
+                element: '#system-management',
                 popover: {
                     title: 'Step 6',
                     description: 'Click System Organization.',
@@ -286,9 +286,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
             {
-                element: '#alert-managemenet-title',
+                element: '#alert-management-title',
                 popover: {
-                    title: 'Alert Managemenet',
+                    title: 'Alert Management',
                     description: '',
                     side: 'top',
                     align: 'start',

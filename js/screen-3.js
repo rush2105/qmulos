@@ -71,7 +71,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 allowClose: true,
                 steps: [
                     {
-                        element: '#system-managemenet',
+                        element: '#system-management',
                         popover: {
                             title: 'Click on System Management',
                             description: '',

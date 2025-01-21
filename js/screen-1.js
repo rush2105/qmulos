@@ -208,14 +208,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const currentStep = driverObj.getActiveIndex();
 
             sessionStorage.setItem('highlightStep', currentStep);
-            const progressBox = document.querySelector('#tourProgressBox');
-            const steps = progressBox.querySelectorAll('.step-item');
-            // Mark all steps up to current step as completed
-            steps.forEach((stepItem, index) => {
-                if (index < currentStep) {
-                    stepItem.classList.add('completed');
-                }
-            });
+         
             if(currentStep === 2){
                 if($('#conf-1-opener').hasClass('open')){
                     $('#conf-1-opener').removeClass('open')
@@ -327,7 +320,7 @@ document.addEventListener("DOMContentLoaded", function () {
                         continueBtn.remove();
                     });
                 }
-            }, 10000); // 10 seconds delay
+            }, 1000); // 10 seconds delay
         }
     });
     const progressBox = createTourProgressBox();
