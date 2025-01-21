@@ -18,6 +18,117 @@ $(document).ready(function () {
 
 const alertStep = [1,2,3];
 const driver = window.driver.js.driver;
+let driverObj;
+function createTourProgressBox() {
+    // Create main container
+    const progressBox = document.createElement('div');
+    progressBox.id = 'tourProgressBox';
+    progressBox.innerHTML = `
+        <div class="progress-header">
+            <span>Tour Progress</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+        <div class="progress-content" style="display: none;">
+           
+            <ul class="progress-steps">
+                <li data-step="0" class="step-item">
+                    <i class="far fa-square"></i>
+                    <span>Welcome</span>
+                </li>
+                <li data-step="1" class="step-item">
+                    <i class="far fa-square"></i>
+                    <span>Overview</span>
+                </li>
+                <li data-step="2" class="step-item">
+                    <i class="far fa-square"></i>
+                    <span>Configuration Dropdown</span>
+                </li>
+                <li data-step="3" class="step-item">
+                    <i class="far fa-square"></i>
+                    <span>Compliance Indicators</span>
+                </li>
+                <li data-step="4" class="step-item">
+                    <i class="far fa-square"></i>
+                    <span>Data Sources</span>
+                </li>
+            </ul>
+        </div>
+    `;
+
+    // Add styles
+    const styles = document.createElement('style');
+    styles.textContent = `
+        #tourProgressBox {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            min-width: 150px;
+            font-family: Arial, sans-serif;
+        }
+        .progress-header {
+            padding: 10px 15px;
+            background: #007a33;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .progress-content {
+            padding: 15px;
+            background: white;
+            border-radius: 0 0 5px 5px;
+        }
+        .progress-close {
+            text-align: right;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+        .progress-steps {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .step-item {
+            padding: 8px 0;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .step-item.completed {
+            text-decoration: line-through;
+        }
+        .step-item.completed i {
+            color: #007a33;
+        }
+    `;
+
+    document.head.appendChild(styles);
+    document.body.appendChild(progressBox);
+
+    // Event Listeners
+    const header = progressBox.querySelector('.progress-header');
+    const content = progressBox.querySelector('.progress-content');
+    
+
+    header.addEventListener('click', () => {
+        content.style.display = content.style.display === 'none' ? 'block' : 'none';
+        header.querySelector('i').classList.toggle('fa-chevron-down');
+        header.querySelector('i').classList.toggle('fa-chevron-up');
+    });
+
+  
+
+  
+
+    return progressBox;
+}
 
 document.addEventListener("DOMContentLoaded", function () {
     $('#conf-open').click(function (e) {
@@ -97,11 +208,30 @@ document.addEventListener("DOMContentLoaded", function () {
             const currentStep = driverObj.getActiveIndex();
 
             sessionStorage.setItem('highlightStep', currentStep);
-       
+            const progressBox = document.querySelector('#tourProgressBox');
+            const steps = progressBox.querySelectorAll('.step-item');
+            // Mark all steps up to current step as completed
+            steps.forEach((stepItem, index) => {
+                if (index < currentStep) {
+                    stepItem.classList.add('completed');
+                }
+            });
+            if(currentStep === 2){
+                if($('#conf-1-opener').hasClass('open')){
+                    $('#conf-1-opener').removeClass('open')
+                   }
+            }
 
-            // Store current step in session storage when each step starts
-            // const currentStep = driver.currentStep;
-            // sessionStorage.setItem('highlightStep', currentStep);
+            if(currentStep === 3){
+              this.compareDocumentPosition
+            }
+            if(currentStep === 4){
+                if(!$('#conf-1-opener').hasClass('open')){
+                    $('#conf-1-opener').addClass('open')
+                   }
+               $('#inner-sel').click();
+
+            }
         },
         onPrevClick: (element, step, opts) => {
             const currentStep = driverObj.getActiveIndex();
@@ -117,15 +247,15 @@ document.addEventListener("DOMContentLoaded", function () {
                         }, 500);
                     }
                 } 
-                else if(currentStep === 3){
-                    const confOpenElement = document.querySelector('#conf-open');
-                    if (confOpenElement) {
-                        confOpenElement.click();
-                        setTimeout(() => {
-                            driverObj.drive(currentStep - 1);
-                        }, 500);
-                    }
-                }
+                // else if(currentStep === 3){
+                //     const confOpenElement = document.querySelector('#conf-open');
+                //     if (confOpenElement) {
+                //         confOpenElement.click();
+                //         setTimeout(() => {
+                //             driverObj.drive(currentStep - 1);
+                //         }, 500);
+                //     }
+                // }
                 else {
                     driverObj.drive(currentStep - 1);
                 }
@@ -150,14 +280,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 }
             } 
             else if (currentStep === 3) {
-                const innerSelElement = document.querySelector('#inner-sel');
-                if (innerSelElement) {
-                    innerSelElement.click();
-                    setTimeout(() => {
-                        driverObj.drive(4);
-                    }, 500);
-                }
+                setTimeout(() => {
+                                driverObj.drive(4);
+                            }, 500);
+            }else{
+                driverObj.drive(currentStep + 1);
             }
+            // else if (currentStep === 3) {
+            //     const innerSelElement = document.querySelector('#inner-sel');
+            //     if (innerSelElement) {
+            //         innerSelElement.click();
+            //         setTimeout(() => {
+            //             driverObj.drive(4);
+            //         }, 500);
+            //     }
+            // }
         },
         onDeselected: (element,step) => {
             // sessionStorage.setItem('highlightStep', step.index);
@@ -193,10 +330,18 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 10000); // 10 seconds delay
         }
     });
-
+    const progressBox = createTourProgressBox();
     driverObj.drive();
-});
+    const steps = progressBox.querySelectorAll('.step-item');
 
+    steps.forEach(step => {
+        step.addEventListener('click', () => {
+            const stepIndex = parseInt(step.dataset.step);
+            driverObj.drive(stepIndex);
+        });
+    });
+});
+// 
 
 // ... rest of the code ...
 function scrollToElement(element) {
