@@ -135,10 +135,15 @@ document.addEventListener("DOMContentLoaded", function () {
         driverObj.destroy();
         driverObj.drive(3);
      });
+     $('#inner-sel').click(function (e) {
+        driverObj.destroy();
+        driverObj.drive(4);
+     });
     const driverObj = new driver({
         popoverClass: 'driverjs-theme welcome-popup',
         allowClose: true,
         overlayClickNext: false,
+        overlayOpacity: 0,
         showProgress: true,
         progressText: 'Step {{current}} of {{total}}',
         steps: [
@@ -197,18 +202,40 @@ document.addEventListener("DOMContentLoaded", function () {
                     align: 'start',
                     prevBtnText: 'Previous',
                     closeBtnText: 'Close',
-                    showButtons: ['close', 'previous'] // Removed 'next' to hide finish button
+                    showButtons: ['close', 'previous', 'next']  // Add next button
                 }
             }
         ],
         onCloseClick: () => {
             driverObj.destroy();
         },
+        onHighlightEnded: () => {
+           alert('highlight ended');
+        },
         onHighlightStarted: (element,step) => {
+            
             const currentStep = driverObj.getActiveIndex();
-
-            sessionStorage.setItem('highlightStep', currentStep);
+          if(currentStep === 4){
+            
+            setTimeout(() => {
+                $('.driver-popover-next-btn').text('Next');
+                $('.driver-popover-next-btn').click(function(){
+                    window.location.href = '/your-redirect-url';  // Replace with your desired URL
+                })
+            }, 400);
          
+          }else{
+            $('.driver-popover-next-btn').unbind('click');
+          }
+            sessionStorage.setItem('highlightStep', currentStep);
+            const progressBox = document.querySelector('#tourProgressBox');
+            const steps = progressBox.querySelectorAll('.step-item');
+            // Mark all steps up to current step as completed
+            steps.forEach((stepItem, index) => {
+                if (index < currentStep) {
+                    stepItem.classList.add('completed');
+                }
+            });
             if(currentStep === 2){
                 if($('#conf-1-opener').hasClass('open')){
                     $('#conf-1-opener').removeClass('open')
@@ -216,14 +243,17 @@ document.addEventListener("DOMContentLoaded", function () {
             }
 
             if(currentStep === 3){
-              this.compareDocumentPosition
+              
             }
-            if(currentStep === 4){
+            if(currentStep === 3){
                 if(!$('#conf-1-opener').hasClass('open')){
                     $('#conf-1-opener').addClass('open')
                    }
                $('#inner-sel').click();
 
+            }
+            if(currentStep === 5){
+                window.location.href = '/your-redirect-url';  // Replace with your desired URL
             }
         },
         onPrevClick: (element, step, opts) => {
@@ -231,7 +261,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // sessionStorage.setItem('highlightStep', step.index);
 
             if (currentStep > 0) {
-                if (currentStep === 4) { // If going back from step 5 to 4
+                if (currentStep === 3) { // If going back from step 5 to 4
                     const backButton = document.querySelector('#backbtc');
                     if (backButton) {
                         backButton.click();
@@ -330,7 +360,9 @@ document.addEventListener("DOMContentLoaded", function () {
     steps.forEach(step => {
         step.addEventListener('click', () => {
             const stepIndex = parseInt(step.dataset.step);
-            driverObj.drive(stepIndex);
+            if(stepIndex === 4){
+                driverObj.drive(2);
+            }
         });
     });
 });

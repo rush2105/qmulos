@@ -145,6 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
         allowClose: true,
         overlayClickNext: false,
         showProgress: true,
+        overlayOpacity: 0,
         progressText: 'Step {{current}} of {{total}}',
         steps: [
             {
@@ -189,7 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     align: 'start',
                     prevBtnText: 'Previous',
                     closeBtnText: 'Close',
-                    showButtons: ['close', 'previous'] // Removed 'next' to hide finish button
+                    showButtons: ['close', 'previous','next'] // Removed 'next' to hide finish button
                 }
             }
         ],
