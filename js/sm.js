@@ -319,7 +319,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     side: 'top',
                     align: 'start',
                     doneBtnText: 'Next',
-                    showButtons: ['close', 'previous']
+                    showButtons: ['close', 'previous', 'next'] 
                 }
             },
             
@@ -358,7 +358,8 @@ document.addEventListener("DOMContentLoaded", function () {
         },
         onNextClick: (element, step, opts) => {
             const currentStep = driverObj.getActiveIndex();
-        //    alert(currentStep);
+        
+            
             if (currentStep === 0) {
                 const selectOrgButton = document.querySelector('#btnSelectOrgInitial');
                 if (selectOrgButton) {
@@ -429,7 +430,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     driverObj.drive(7);
                 }, 1500);
             }else{
-               alert(currentStep);
+            
             }
         },
         onDeselected: (element,step) => {

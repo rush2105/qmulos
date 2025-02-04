@@ -162,7 +162,8 @@ document.addEventListener("DOMContentLoaded", function () {
                         align: 'start',
                         prevBtnText: 'Previous',
                         closeBtnText: 'Close',
-                        showButtons: ['close', 'previous']
+                        doneBtnText: 'Next',
+                        showButtons: ['close', 'previous', 'next'] 
                     }
                 }
             ],
@@ -238,7 +239,9 @@ document.addEventListener("DOMContentLoaded", function () {
         });
         const progressBox = createTourProgressBox();
         // Start the tour
-        driverObj.drive();
+        setTimeout(() => {
+            driverObj.drive();
+        }, 5000);
         const steps = progressBox.querySelectorAll('.step-item');
 
         steps.forEach(step => {

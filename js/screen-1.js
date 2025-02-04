@@ -202,6 +202,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     align: 'start',
                     prevBtnText: 'Previous',
                     closeBtnText: 'Close',
+                    doneBtnText: 'Next',
                     showButtons: ['close', 'previous', 'next']  // Add next button
                 }
             }
@@ -209,8 +210,11 @@ document.addEventListener("DOMContentLoaded", function () {
         onCloseClick: () => {
             driverObj.destroy();
         },
-        onHighlightEnded: () => {
-           alert('highlight ended');
+        onDeselected: (element,step) => {
+         
+            if (driver.hasNextStep() === false) {
+                window.location.href = '/screen-2.html';  // Replace with your desired URL
+            }
         },
         onHighlightStarted: (element,step) => {
             
@@ -218,7 +222,7 @@ document.addEventListener("DOMContentLoaded", function () {
           if(currentStep === 4){
             
             setTimeout(() => {
-                $('.driver-popover-next-btn').text('Next');
+                // $('.driver-popover-next-btn').text('Next');
                 $('.driver-popover-next-btn').click(function(){
                     window.location.href = '/your-redirect-url';  // Replace with your desired URL
                 })

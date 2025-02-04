@@ -349,7 +349,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     align: 'start',
                     prevBtnText: 'Previous',
                     closeBtnText: 'Close',
-                    showButtons: ['close', 'previous']
+                    doneBtnText: 'Next',
+                    showButtons: ['close', 'previous', 'next'] 
                 }
             }
         ],
