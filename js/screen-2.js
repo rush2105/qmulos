@@ -235,7 +235,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 driverObj.drive(currentStep + 1);
             }
             else if (currentStep === 3) {
-               window.location.href = '/org-management.html';
+               window.location.href = 'org-management.html';
             }else{
                 driverObj.drive(currentStep + 1);
             }

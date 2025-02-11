@@ -431,7 +431,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 }, 1500);
             }
             else if(currentStep === 10){
-                window.location.href = '/control-compliance.html';
+                window.location.href = 'control-compliance.html';
             }
             else{
             

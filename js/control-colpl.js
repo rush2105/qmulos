@@ -337,7 +337,7 @@ document.addEventListener("DOMContentLoaded", function () {
             
             } 
             if(currentStep === 9){
-                window.location.href = '/alert-management.html';
+                window.location.href = 'alert-management.html';
             }
         },
         onDeselected: (element,step) => {

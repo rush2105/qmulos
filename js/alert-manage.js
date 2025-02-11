@@ -203,7 +203,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     }, 500);
                 }
                 if(currentStep === 1){
-                    window.location.href = '/compliance.html';
+                    window.location.href = 'compliance.html';
                 }
             },
             onDeselected: (element,step) => {

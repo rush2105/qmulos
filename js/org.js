@@ -434,7 +434,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     driverObj.drive(4);
                 }, 500);
             }else if(currentStep === 4){
-                window.location.href = '/system-management.html';
+                window.location.href = 'system-management.html';
             }
         },
         onDeselected: (element,step) => {

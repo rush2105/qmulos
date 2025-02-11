@@ -306,7 +306,7 @@ document.addEventListener("DOMContentLoaded", function () {
             $('#ato_workflow_submit_btn.real').click();
           }
           if(currentStep === 11){
-            window.location.href = '/index.html';
+            window.location.href = 'index.html';
           }
       },
       onDeselected: (element, step) => {

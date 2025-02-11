@@ -348,7 +348,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 driverObj.drive(10); // Simply move to next step
             }
             else if(currentStep === 10){
-                window.location.href = '/system-authorization.html';
+                window.location.href = 'system-authorization.html';
             }
             else {
              
