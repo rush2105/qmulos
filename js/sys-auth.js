@@ -299,6 +299,15 @@ document.addEventListener("DOMContentLoaded", function () {
           const currentStep = driverObj.getActiveIndex();
         
           driverObj.drive(currentStep + 1);
+          if(currentStep === 5){
+           $('#start-approval-workflow-button').click();
+          }
+          if(currentStep === 7){
+            $('#ato_workflow_submit_btn.real').click();
+          }
+          if(currentStep === 11){
+            window.location.href = '/index.html';
+          }
       },
       onDeselected: (element, step) => {
           setTimeout(() => {

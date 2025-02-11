@@ -347,7 +347,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 $('#sys-overview-dropdown').click();
                 driverObj.drive(10); // Simply move to next step
             }
-
+            else if(currentStep === 10){
+                window.location.href = '/system-authorization.html';
+            }
             else {
              
                 driverObj.drive(currentStep + 1);

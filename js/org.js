@@ -433,6 +433,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 setTimeout(() => {
                     driverObj.drive(4);
                 }, 500);
+            }else if(currentStep === 4){
+                window.location.href = '/system-management.html';
             }
         },
         onDeselected: (element,step) => {

@@ -202,6 +202,9 @@ document.addEventListener("DOMContentLoaded", function () {
                         driverObj.drive(1);
                     }, 500);
                 }
+                if(currentStep === 1){
+                    window.location.href = '/compliance.html';
+                }
             },
             onDeselected: (element,step) => {
                 // sessionStorage.setItem('highlightStep', step.index);
@@ -241,7 +244,7 @@ document.addEventListener("DOMContentLoaded", function () {
         // Start the tour
         setTimeout(() => {
             driverObj.drive();
-        }, 5000);
+        }, 2000);
         const steps = progressBox.querySelectorAll('.step-item');
 
         steps.forEach(step => {

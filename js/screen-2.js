@@ -190,6 +190,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     align: 'start',
                     prevBtnText: 'Previous',
                     closeBtnText: 'Close',
+                    doneBtnText: 'Next',
                     showButtons: ['close', 'previous','next'] // Removed 'next' to hide finish button
                 }
             }
@@ -233,8 +234,8 @@ document.addEventListener("DOMContentLoaded", function () {
             if (currentStep === 0 || currentStep === 1) {
                 driverObj.drive(currentStep + 1);
             }
-            else if (currentStep === 10) {
-               
+            else if (currentStep === 3) {
+               window.location.href = '/org-management.html';
             }else{
                 driverObj.drive(currentStep + 1);
             }

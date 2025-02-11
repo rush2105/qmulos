@@ -429,7 +429,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 setTimeout(() => {
                     driverObj.drive(7);
                 }, 1500);
-            }else{
+            }
+            else if(currentStep === 10){
+                window.location.href = '/control-compliance.html';
+            }
+            else{
             
             }
         },

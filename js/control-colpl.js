@@ -335,6 +335,9 @@ document.addEventListener("DOMContentLoaded", function () {
             if(  currentStep === 7 || currentStep === 10){
                 $('#singlevalue.special-item').click();
             
+            } 
+            if(currentStep === 9){
+                window.location.href = '/alert-management.html';
             }
         },
         onDeselected: (element,step) => {

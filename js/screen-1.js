@@ -210,27 +210,24 @@ document.addEventListener("DOMContentLoaded", function () {
         onCloseClick: () => {
             driverObj.destroy();
         },
-        onDeselected: (element,step) => {
-         
-            if (driver.hasNextStep() === false) {
-                window.location.href = '/screen-2.html';  // Replace with your desired URL
+        onDeselected: (element, step) => {
+            if (driverObj.getActiveIndex() === driverObj.getSteps().length - 1) {
+                // This is the last step, redirect to the next page
+                window.location.href = '/data-sources.html';
             }
+            
+            // Keep the existing tour continuation logic
+            setTimeout(() => {
+                if (!sessionStorage.getItem('tourCompleted')) {
+                    const continueBtn = document.createElement('button');
+                    // ... existing continue button code ...
+                }
+            }, 1000);
         },
         onHighlightStarted: (element,step) => {
             
             const currentStep = driverObj.getActiveIndex();
-          if(currentStep === 4){
-            
-            setTimeout(() => {
-                // $('.driver-popover-next-btn').text('Next');
-                $('.driver-popover-next-btn').click(function(){
-                    window.location.href = '/your-redirect-url';  // Replace with your desired URL
-                })
-            }, 400);
-         
-          }else{
-            $('.driver-popover-next-btn').unbind('click');
-          }
+      
             sessionStorage.setItem('highlightStep', currentStep);
             const progressBox = document.querySelector('#tourProgressBox');
             const steps = progressBox.querySelectorAll('.step-item');
@@ -246,9 +243,7 @@ document.addEventListener("DOMContentLoaded", function () {
                    }
             }
 
-            if(currentStep === 3){
-              
-            }
+           
             if(currentStep === 3){
                 if(!$('#conf-1-opener').hasClass('open')){
                     $('#conf-1-opener').addClass('open')
@@ -256,9 +251,12 @@ document.addEventListener("DOMContentLoaded", function () {
                $('#inner-sel').click();
 
             }
-            if(currentStep === 5){
-                window.location.href = '/your-redirect-url';  // Replace with your desired URL
+            if(currentStep === 4){
+                $('body').addClass('tour-adjusted');
+            }else{
+                $('body').removeClass('tour-adjusted');
             }
+        
         },
         onPrevClick: (element, step, opts) => {
             const currentStep = driverObj.getActiveIndex();
@@ -310,18 +308,19 @@ document.addEventListener("DOMContentLoaded", function () {
                 setTimeout(() => {
                                 driverObj.drive(4);
                             }, 500);
-            }else{
+            }
+             else if(currentStep === 4){
+                
+                if(!$('body').hasClass('tour-adjusted')){
+                $('#inner-sel').click();
+                }else{
+                    window.location.href = '/data-sources.html';
+                }
+             }
+            else{
                 driverObj.drive(currentStep + 1);
             }
-            // else if (currentStep === 3) {
-            //     const innerSelElement = document.querySelector('#inner-sel');
-            //     if (innerSelElement) {
-            //         innerSelElement.click();
-            //         setTimeout(() => {
-            //             driverObj.drive(4);
-            //         }, 500);
-            //     }
-            // }
+     
         },
         onDeselected: (element,step) => {
             // sessionStorage.setItem('highlightStep', step.index);
