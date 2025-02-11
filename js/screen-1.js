@@ -314,7 +314,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 if(!$('body').hasClass('tour-adjusted')){
                 $('#inner-sel').click();
                 }else{
-                    window.location.href = '/data-sources.html';
+                    window.location.href = 'data-sources.html';
                 }
              }
             else{
